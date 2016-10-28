@@ -24,6 +24,9 @@ first_term = -y .* log(activation);
 second_term = (1-y) .* log(1 - activation);
 summation = sum(first_term - second_term);
 J = (1/m) * summation;
+
+grad = ((1/m) * X' * (activation - y));
+
 % =============================================================
 
 end
