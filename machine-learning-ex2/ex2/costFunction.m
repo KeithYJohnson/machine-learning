@@ -7,7 +7,7 @@ function [J, grad] = costFunction(theta, X, y)
 % Initialize some useful values
 m = length(y); % number of training examples
 
-% You need to return the following variables correctly 
+% You need to return the following variables correctly
 J = 0;
 grad = zeros(size(theta));
 
@@ -19,14 +19,11 @@ grad = zeros(size(theta));
 %
 % Note: grad should have the same dimensions as theta
 %
-
-
-
-
-
-
-
-
+activation = sigmoid(X*theta);
+first_term = -y * log(activation');
+second_term = (1-y)* log(1 - activation');
+summation = sum(first_term - second_term);
+J = (1/m) * summation;
 % =============================================================
 
 end
