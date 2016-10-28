@@ -20,8 +20,8 @@ grad = zeros(size(theta));
 % Note: grad should have the same dimensions as theta
 %
 activation = sigmoid(X*theta);
-first_term = -y * log(activation');
-second_term = (1-y)* log(1 - activation');
+first_term = -y .* log(activation);
+second_term = (1-y) .* log(1 - activation);
 summation = sum(first_term - second_term);
 J = (1/m) * summation;
 % =============================================================
