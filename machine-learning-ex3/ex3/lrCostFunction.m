@@ -11,8 +11,7 @@ m = length(y); % number of training examples
 % You need to return the following variables correctly
 J = 0;
 grad = zeros(size(theta));
-
-regulization_term = sum((lambda/m) * theta)
+regulization_term = lambda/(2*m) * sum(theta(2:length(theta)).*theta(2:length(theta)))
 
 activation = sigmoid(X*theta);
 first_term = -y .* log(activation);
