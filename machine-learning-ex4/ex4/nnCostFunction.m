@@ -60,8 +60,8 @@ second_term = (1-y_matrix) .* log(1 - second_layer_activation);
 matrix_cost = (1/m) * sum(first_term - second_term);
 
 %The first column refers to the biases and we ignore that here.
-theta1_regulation_term = sum(Theta1(:,2:size(Theta1,2)) .* Theta1(:,2:size(Theta1,2)));
-theta2_regulation_term = sum(Theta2(:,2:size(Theta2,2)) .* Theta2(:,2:size(Theta2,2)));
+theta1_regulation_term = sum(Theta1(:,2:end) .* Theta1(:,2:end));
+theta2_regulation_term = sum(Theta2(:,2:end) .* Theta2(:,2:end));
 regulation_term = lambda/(2*m) * (sum(theta1_regulation_term) + sum(theta2_regulation_term));
 
 J = sum(matrix_cost) + regulation_term;
