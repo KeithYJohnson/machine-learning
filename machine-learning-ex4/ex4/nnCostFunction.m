@@ -52,13 +52,19 @@ X = [ones(size(X,1),1) X];
 first_layer_activation = sigmoid(X*Theta1');
 %prepend column of ones
 first_layer_activation = [ones(size(first_layer_activation,1),1) first_layer_activation];
+
 second_layer_activation = sigmoid(first_layer_activation * Theta2');
 
 first_term = -y_matrix .* log(second_layer_activation);
 second_term = (1-y_matrix) .* log(1 - second_layer_activation);
 matrix_cost = (1/m) * sum(first_term - second_term);
 
-J = sum(matrix_cost);
+%The first column refers to the biases and we ignore that here.
+theta1_regulation_term = sum(Theta1(:,2:size(Theta1,2)) .* Theta1(:,2:size(Theta1,2)));
+theta2_regulation_term = sum(Theta2(:,2:size(Theta2,2)) .* Theta2(:,2:size(Theta2,2)));
+regulation_term = lambda/(2*m) * (sum(theta1_regulation_term) + sum(theta2_regulation_term));
+
+J = sum(matrix_cost) + regulation_term;
 %
 % Part 2: Implement the backpropagation algorithm to compute the gradients
 %         Theta1_grad and Theta2_grad. You should return the partial derivatives of
