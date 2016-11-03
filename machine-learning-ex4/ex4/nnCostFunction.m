@@ -106,8 +106,20 @@ for t = 1:m
 end
 
 %Capital D Delta updates
-Theta1_grad = (1/m) * Theta1_grad;
-Theta2_grad = (1/m) * Theta2_grad;
+unreg_theta1 = (1/m) * Theta1_grad;
+%regularazing
+unreg_theta1(:,2:end) = unreg_theta1(:,2:end) + (lambda/m) * Theta1(:, 2:end);
+
+unreg_theta2 =(1/m) * Theta2_grad;
+%regularazing
+unreg_theta2(:,2:end) = unreg_theta2(:,2:end) + (lambda/m) * Theta2(:, 2:end);
+
+% W/0 regularization
+% Theta1_gradl = (1/m) * Theta1_grad + (lambda/m) * Theta1(:, 2:end);
+% Theta2_grad = (1/m) * Theta2_grad + (lambda/m) * Theta2(:, 2:end);
+
+Theta1_grad = unreg_theta1;
+Theta2_grad = unreg_theta2;
 
 
 
