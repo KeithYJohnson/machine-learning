@@ -47,9 +47,9 @@ Theta2_grad = zeros(size(Theta2));
 y_matrix = eye(num_labels)(y,:);
 
 %prepend column of ones
-X = [ones(size(X,1),1) X];
+a1 = [ones(size(X,1),1) X];
 
-first_layer_activation = sigmoid(X*Theta1');
+first_layer_activation = sigmoid(a1*Theta1');
 %prepend column of ones
 first_layer_activation = [ones(size(first_layer_activation,1),1) first_layer_activation];
 
