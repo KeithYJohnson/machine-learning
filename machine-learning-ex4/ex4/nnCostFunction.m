@@ -81,6 +81,38 @@ J = sum(matrix_cost) + regulation_term;
 %               over the training examples if you are implementing it for the
 %               first time.
 %
+for t = 1:m
+  a1 = [1; X(t,:)'];
+
+  z2 = Theta1*a1;
+  a2 = [1; sigmoid(z2)];
+
+  z3 = Theta2 * a2;
+  a3 = [sigmoid(z3)];
+
+   %each of these terms should be a vector
+   % whos dimension is equal to the number of output units
+  classes = ([1:num_labels])';
+  is_training_unit_vector = classes == y(t);
+  delta3 = a3 - is_training_unit_vector;
+
+
+  delta2 = Theta2' * delta3 .* [1; sigmoidGradient(z2)];
+  delta2 = delta2(2:end);
+
+  Theta1_grad = Theta1_grad + delta2 * a1';
+  Theta2_grad = Theta2_grad + delta3 * a2';
+
+end
+
+%Capital D Delta updates
+Theta1_grad = (1/m) * Theta1_grad;
+Theta2_grad = (1/m) * Theta2_grad;
+
+
+
+
+
 % Part 3: Implement regularization with the cost function and gradients.
 %
 %         Hint: You can implement this around the code for
