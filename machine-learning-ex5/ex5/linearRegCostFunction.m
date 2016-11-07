@@ -22,7 +22,7 @@ grad = zeros(size(theta));
 feature_activation = X * theta;
 error_matrix = (feature_activation - y).^2;
 
-regulization_term = lambda/(2*m) * sum(theta(2:end) .* theta(2:end))
+regulization_term = lambda/(2*m) * sum(theta(2:end) .* theta(2:end));
 
 J = (1/(2*m)) * sum(error_matrix) + regulization_term;
 
