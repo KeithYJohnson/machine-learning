@@ -26,7 +26,10 @@ regulization_term = lambda/(2*m) * sum(theta(2:end) .* theta(2:end))
 
 J = (1/(2*m)) * sum(error_matrix) + regulization_term;
 
-
+% dont regularize the bias.
+regularization_grad_term = (lambda/m) * theta;
+regularization_grad_term(1) = 0;
+grad = ((1/m) .* X' * (feature_activation - y)) + regularization_grad_term;
 
 
 
