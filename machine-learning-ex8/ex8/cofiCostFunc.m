@@ -39,22 +39,11 @@ Theta_grad = zeros(size(Theta));
 %        Theta_grad - num_users x num_features matrix, containing the
 %                     partial derivatives w.r.t. to each element of Theta
 %
+prediction_matrix = X * Theta' .* R;
+prediction_error_matrix = (prediction_matrix - Y) .^ 2;
+J = .5 * sum(prediction_error_matrix(:));
 
-for i = 1:num_movies;
-  movie_i_features = X(i,:);
-  for j = 1:num_users
-    user_j_theta = Theta(j,:);
 
-    if R(i,j) == 1
-      actual_rating = Y(i,j);
-      activation = dot(user_j_theta', movie_i_features);
-      prediction_error = (activation - actual_rating)^2;
-      J = J + prediction_error;
-    end
-  end
-end
-
-J = .5 * J;
 
 
 
