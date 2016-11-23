@@ -46,7 +46,9 @@ prediction_error_matrix = (prediction_matrix - Y) .^ 2;
 % user j didnt rate some movie i.
 prediction_error_matrix = prediction_error_matrix  .* R;
 
-J = .5 * sum(prediction_error_matrix(:));
+J = .5 * sum(prediction_error_matrix(:)) ...
+       + (lambda/2) * sum(Theta(:) .^ 2) ...
+       + (lambda/2) * sum(X(:) .^ 2);
 
 X_grad = ((X * Theta' - Y) .* R) * Theta + lambda .* X;
 Theta_grad = ((X * Theta' - Y) .* R)' * X + lambda .* Theta;
