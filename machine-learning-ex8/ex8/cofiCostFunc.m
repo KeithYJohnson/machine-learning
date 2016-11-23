@@ -39,8 +39,13 @@ Theta_grad = zeros(size(Theta));
 %        Theta_grad - num_users x num_features matrix, containing the
 %                     partial derivatives w.r.t. to each element of Theta
 %
-prediction_matrix = X * Theta' .* R;
+prediction_matrix = X * Theta';
 prediction_error_matrix = (prediction_matrix - Y) .^ 2;
+
+% So we dont count errors calulated even though some
+% user j didnt rate some movie i.
+prediction_error_matrix = prediction_error_matrix  .* R;
+
 J = .5 * sum(prediction_error_matrix(:));
 
 
